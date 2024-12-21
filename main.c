@@ -36,26 +36,41 @@ int main() {
     printf("-------------------------------\n");
 
     if (var == 2) {
-        // For 2 variables, the K-map is 2x2
-        int kmap2[2][2] = {{0, 0}, {0, 0}}; // Initialize to 0
+        int kmap2[2][2] = {0}; // Initialize 2x2 K-map
+        int kmap4[4][4] = {0}; // Initialize 4x4 K-map
 
-        // Fill the K-map based on minterms
-        for (int i = 0; i < m; i++) {
-            int minterm = minterms[i];
-            if (minterm < 4) {
-                int row = minterm / 2;  // Calculate row index
-                int col = minterm % 2;  // Calculate column index
-                kmap2[row][col] = 1;   // Set the cell to 1
+        // Fill the 2x2 K-map
+        for (int i = 0; i < 4; i++) {
+            if (contains(minterms, i)) {
+                kmap2[i / 2][i % 2] = 1; // Mark as 1 if the minterm exists
             }
         }
 
-        // Print the K-map
-        printf("K-map:\n");
+        // Expand the 2x2 K-map into the 4x4 K-map
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                printf("%d ", kmap2[i][j]);
+                kmap4[i][j] = kmap2[i][j];         // Top-left quadrant
+                kmap4[i + 2][j] = kmap2[i][j];     // Bottom-left quadrant
+                kmap4[i][j + 2] = kmap2[i][j];     // Top-right quadrant
+                kmap4[i + 2][j + 2] = -1;          // Bottom-right quadrant (X represented as -1)
+            }
+        }
+
+        // Print the 4x4 K-map
+        printf("2x2 K-map:\n");
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (kmap2[i][j] == -1)
+                    printf("X ");
+                else
+                    printf("%d ", kmap2[i][j]);
             }
             printf("\n");
+        }
+    //Now working with the algorithm,
+    //checking groups of 4,
+        if(m==4){
+            printf("The expression is: 0\n");
         }
     }
     return 0;
