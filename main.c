@@ -46,16 +46,6 @@ int main() {
             }
         }
 
-        // Expand the 2x2 K-map into the 4x4 K-map
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                kmap4[i][j] = kmap2[i][j];         // Top-left quadrant
-                kmap4[i + 2][j] = kmap2[i][j];     // Bottom-left quadrant
-                kmap4[i][j + 2] = kmap2[i][j];     // Top-right quadrant
-                kmap4[i + 2][j + 2] = -1;          // Bottom-right quadrant (X represented as -1)
-            }
-        }
-
         // Print the 4x4 K-map
         printf("2x2 K-map:\n");
         for (int i = 0; i < 2; i++) {
@@ -67,11 +57,85 @@ int main() {
             }
             printf("\n");
         }
+        //CHECKING IF THE ANSWERR WILL HAVE ONE ONE TERM OR TWO
+
+        int count=0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                if(kmap2[i][j]==1){
+                    count++;
+                }
+            }
+        }
+        //IF ONE TERM I.E A GROUP OF 2 ONLY
+    if(count%2==0){
     //Now working with the algorithm,
     //checking groups of 4,
         if(m==4){
             printf("The expression is: 0\n");
         }
+    //checking Groups of 2
+        if((kmap2[0][0]==1&&kmap2[0][1]==1) && (kmap2[1][0]==0&&kmap2[1][1]==0)){
+            printf("The expression is: A'\n");
+        }
+        if((kmap2[1][0]==1&&kmap2[1][1]==1) && (kmap2[0][0]==0&&kmap2[0][1]==0)){
+            printf("The expression is: A\n");
+        }
+        if((kmap2[0][0]==1&&kmap2[1][0]==1) && (kmap2[0][1]==0&&kmap2[1][1]==0)){
+            printf("The expression is: B'\n");
+        }
+        if((kmap2[0][1]==1&&kmap2[1][1]==1) && (kmap2[0][0]==0&&kmap2[1][0]==0)){
+            printf("The expression is: B\n");
+        }
+    }
+    else if(count==3){
+    //checking groups of 2
+        int visa;
+        if((kmap2[0][0]==1&&kmap2[0][1]==1)){
+            printf("The expression is: A'");
+            visa=1;
+        }
+        else if((kmap2[1][0]==1&&kmap2[1][1]==1)){
+            printf("The expression is: A");
+            visa=2;
+        }
+        else if((kmap2[0][0]==1&&kmap2[1][0]==1)){
+            printf("The expression is: B'");
+            visa=3;
+        }
+        else if((kmap2[0][1]==1&&kmap2[1][1]==1)){
+            printf("The expression is: B");
+            visa=4;
+        }
+        printf(" + ");
+        if((kmap2[0][0]==1&&kmap2[0][1]==1)&&visa!=1){
+            printf("A'");
+        }
+        if((kmap2[1][0]==1&&kmap2[1][1]==1)&&visa!=2){
+            printf("A");
+        }
+        if((kmap2[0][0]==1&&kmap2[1][0]==1)&&visa!=3){
+            printf("B'");
+        }
+        if((kmap2[0][1]==1&&kmap2[1][1]==1)&&visa!=4){
+            printf("B");
+        }
+    }
+    else if(count==1){
+        printf("The Expression is: ");
+        if(kmap2[0][0]==1){
+            printf("A'B'");
+        }
+        if(kmap2[0][1]==1){
+            printf("A'B");
+        }
+        if(kmap2[1][0]==1){
+            printf("AB'");
+        }
+        if(kmap2[1][1]==1){
+            printf("AB");
+        }
+    }
     }
     return 0;
 }
