@@ -1,3 +1,12 @@
 # kmwc
-Kmaps with C.
-Yeah, this is a challenge i was given by my electronics professor
+Kmaps with C
+
+Questions and Answers:
+
+Q1. What are Kmaps (Karnaugh-map)?
+
+Answer: https://en.wikipedia.org/wiki/Karnaugh_map
+
+Q2. Why?
+
+Answer: For FUN
