@@ -1,2 +1,3 @@
 # kmwc
-Kmaps with C
+Kmaps solver with C
+
